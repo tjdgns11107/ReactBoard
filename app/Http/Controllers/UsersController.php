@@ -7,6 +7,10 @@ use Illuminate\Support\Facades\DB;
 
 class UsersController extends Controller
 {
+    // public function __construct() {
+    //     $this->middleware('guest');
+    // }
+
     public function check(Request $request) {
         $email = $request->email;
         $result = DB::table('users')->where('email', $email)->value('email');
@@ -21,21 +25,23 @@ class UsersController extends Controller
             return ["message" => "used"];
         }
 
-        // $user = \App\Models\User::create([
-        //     'email' => $request->input('email'),
-        //     'name' => $request->input('name'),
-        //     'password' => bcrypt($request->input('password')),
-        // ]);
-
-        $user = DB::table('users')->insert([
+        $user = \App\Models\User::create([
             'email' => $request->input('email'),
             'name' => $request->input('name'),
             'password' => bcrypt($request->input('password')),
         ]);
 
-        // auth()->login($user);
-        // return $user;
+        // $user = DB::table('users')->insert([
+            // 'email' => $request->input('email'),
+            // 'name' => $request->input('name'),
+            // 'password' => bcrypt($request->input('password')),
+        // ]);
 
-        return;
+        // auth()->login($user);
+
+        // return auth()->user()->name;
+
+        \Auth::login($user);
+        return \Auth::user()->name;
     }
 }

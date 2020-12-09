@@ -1,8 +1,12 @@
-import React, {useState} from 'react';
+import React, {useState, useContext} from 'react';
 import {Link} from 'react-router-dom';
 import Axios from 'axios';
 
+import { AppContext } from '../components/App';
+
 const RegistForm = ({location, history}) => {
+    const { setIsLoggedIn, setUserName } = useContext(AppContext);
+
     const [email, setEmail] = useState("");
     const [name, setName] = useState("");
     const [password, setPassword] = useState("");
@@ -88,10 +92,15 @@ const RegistForm = ({location, history}) => {
                         return;
                     }
                     console.log("rs", result, 'rsdt',result.data);
+                    alert(result.data + "님의 가입이 완료되었습니다.");
+                    setUserName(result.data);
+                    setIsLoggedIn('login');
+                    console.log('end regist');
+                    history.push('/');
+                    return;
                 })
                 .catch(err => {
                     console.log("regist err", err);
-                    // 메인 페이지로 이동
                 })
         // 중복
         } else if( checkId === 0 ) {
@@ -145,7 +154,7 @@ const RegistForm = ({location, history}) => {
         color: 'white',
     }
 
-    const RegistBtn = {
+    const registBtn = {
         width: 600,
         height: 70,
         fontSize: 22,
@@ -201,7 +210,7 @@ const RegistForm = ({location, history}) => {
                 </div>
                 <div className="inputDiv" style={inputDiv}>
                     <button
-                        style={RegistBtn}
+                        style={registBtn}
                         type="submit">
                         회원 가입
                     </button>

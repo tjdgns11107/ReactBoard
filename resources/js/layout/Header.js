@@ -1,9 +1,27 @@
-import React from 'react';
+import React, {useState, useContext} from 'react';
 import {Link} from 'react-router-dom';
+import Axios from 'axios';
 
-// import LoginForm from "./LoginForm";
+import { AppContext } from '../components/App';
 
-const Header = () => {
+const Header = ({location, history}) => {
+    const { isLoggedIn, setIsLoggedIn, userName, setUserName } = useContext(AppContext);
+
+    const logout = () => {
+        console.log("login", isLoggedIn, "name", userName);
+
+        Axios
+            .post('/logout')
+            .then(result => {
+                alert('로그아웃 되었습니다.');
+                console.log('logout result', result);
+                setIsLoggedIn('logout');
+                setUserName(false);
+            })
+            .catch(err => {
+                console.log('logout err', err);
+            })
+    }
 
     const navBar = {
         backgroundColor: 'black',
@@ -43,11 +61,17 @@ const Header = () => {
                 <div className="navStart" style={navStart}>
                     <Link to="/" className="navBtn" style={navBtn}>Main</Link>
                 </div>
-                <div className="navEnd" style={navEnd}>
-                    {/* <Route to="/Login" exact component={LoginForm} className="nav_btn" style={nav_btn} id="login">Login</Route> */}
-                    <Link to="/login" className="navBtn" style={navBtn} id="login">Login</Link>
-                    <Link to="/regist" className="navBtn" style={navBtn} id="regist">Regist</Link>
-                </div>a
+                { isLoggedIn == "login" ? (
+                    <div className="navEnd" style={navEnd}>
+                        <Link to="/" className="navBtn" style={navBtn} id="name">{userName}님</Link>
+                        <Link to="/" className="navBtn" style={navBtn} id="logout" onClick={logout}>Logout</Link>
+                    </div>
+                ) : (
+                    <div className="navEnd" style={navEnd}>
+                        <Link to="/login" className="navBtn" style={navBtn} id="login">Login</Link>
+                        <Link to="/regist" className="navBtn" style={navBtn} id="regist">Regist</Link>
+                    </div>
+                ) }
             </nav>
         </div>
     );

@@ -1,8 +1,12 @@
-import React, {useState} from 'react';
+import React, {useState, useContext} from 'react';
 import {Link} from 'react-router-dom';
 import Axios from 'axios';
 
+import { AppContext } from '../components/App';
+
 const LoginForm = ({location, history}) => {
+    const { setIsLoggedIn, setUserName } = useContext(AppContext);
+
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
@@ -23,7 +27,8 @@ const LoginForm = ({location, history}) => {
         }
 
         const loginData = {
-
+            email,
+            password,
         }
 
         console.log("regist data", loginData);
@@ -32,6 +37,16 @@ const LoginForm = ({location, history}) => {
             .post('/login', loginData)
             .then(result => {
                 console.log("rs", result, 'rsdt',result.data);
+                if(result.data.message == "missMatch") {
+                    alert("아이디와 비밀번호를 확인 해 주세요.");
+                    return;
+                }
+                alert(result.data + "님, 환영합니다.");
+                setIsLoggedIn('login')
+                setUserName(result.data);
+                console.log('end login');
+                history.push('/');
+                return;
             })
             .catch(err => {
                 console.log("regist err", err);
@@ -79,7 +94,7 @@ const LoginForm = ({location, history}) => {
                         type="email"
                         name="email"
                         maxLength="20"
-                        onChange={e => setName(e.target.value)}
+                        onChange={e => setEmail(e.target.value)}
                         placeholder="Email" />
                 </div>
                 <div className="inputDiv" style={inputDiv}>

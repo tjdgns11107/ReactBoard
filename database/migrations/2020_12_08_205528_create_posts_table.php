@@ -15,7 +15,7 @@ class CreatePostsTable extends Migration
     {
         Schema::create('posts', function (Blueprint $table) {
             // $table->id();
-            $table->bigIncrements('post_id');
+            $table->bigIncrements('id');
             $table->unsignedBigInteger('post_user');
             $table->unsignedBigInteger('post_board');
             $table->string('post_password')->nullable();
@@ -27,9 +27,9 @@ class CreatePostsTable extends Migration
             $table->string('post_img')->nullable();
             $table->timestamps();
 
-            $table->foreign('post_user')->references('user_id')->on('users')
+            $table->foreign('post_user')->references('id')->on('users')
                 ->onUpdate('cascade')->onDelete('cascade');
-            $table->foreign('post_board')->references('board_id')->on('boards')
+            $table->foreign('post_board')->references('id')->on('boards')
                 ->onUpdate('cascade')->onDelete('cascade');
         });
     }

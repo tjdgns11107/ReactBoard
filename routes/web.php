@@ -22,3 +22,13 @@ Route::view('/{path?}', 'App');
 Route::post('/regist', '\App\Http\Controllers\UsersController@store');
 
 Route::post('/check', '\App\Http\Controllers\UsersController@check');
+
+Route::post('/login', '\App\Http\Controllers\SessionsController@store');
+
+Route::post('/logout', '\App\Http\Controllers\SessionsController@destroy');
+
+Route::post('/state', '\App\Http\Controllers\SessionsController@state');
+
+Route::get('/profile', '\App\Http\Controllers\SessionsController@edit');
+
+Route::post('/profile', '\App\Http\Controllers\SessionsController@update');
