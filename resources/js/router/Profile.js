@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useContext, useState} from 'react';
 import Axios from 'axios';
 import {Link} from 'react-router-dom';
 
@@ -7,7 +7,6 @@ import { AppContext } from '../components/App';
 const Profile = ({location, history}) => {
     const { setIsLoggedIn, setUserName } = useContext(AppContext);
 
-    const [editEmail, setEditEmail] = useState("");
     const [editName, setEditName] = useState("");
     const [editpw, setEditPw] = useState("");
     const [EditpwCf, setEditPwCf] = useState("");
@@ -46,16 +45,12 @@ const Profile = ({location, history}) => {
 
     return (
         <div className="FormDiv" style={FormDiv}>
-            <form className="editUserForm" style={editUserForm} onSubmit={regist}>
+            <form className="editUserForm" style={editUserForm}>
                 <input type="hidden" name="_csrf" value="${CSRF_TOKEN}" />
                 <div className="inputDiv" style={inputDiv}>
-                    <input
-                        style={inputForm}
-                        type="email"
-                        name="email"
-                        maxLength="100"
-                        onChange={e => setEmail(e.target.value)}
-                        placeholder="Email" />
+                    <div>
+                        
+                    </div>
                 </div>
                 <div className="inputDiv" style={inputDiv}>
                     <input
@@ -63,7 +58,7 @@ const Profile = ({location, history}) => {
                         type="name"
                         name="name"
                         maxLength="20"
-                        onChange={e => setName(e.target.value)}
+                        onChange={e => setEditName(e.target.value)}
                         placeholder="Name" />
                 </div>
                 <div className="inputDiv" style={inputDiv}>
@@ -71,7 +66,7 @@ const Profile = ({location, history}) => {
                         style={inputForm}
                         type="password"
                         name="password"
-                        onChange={e => setPassword(e.target.value)}
+                        onChange={e => setEditPw(e.target.value)}
                         placeholder="Password" />
                 </div>
                 <div className="inputDiv" style={inputDiv}>
@@ -80,7 +75,7 @@ const Profile = ({location, history}) => {
                         type="password"
                         name="pwConfirm"
                         maxLength="100"
-                        onChange={e => setPwConfirm(e.target.value)}
+                        onChange={e => setEditPwCf(e.target.value)}
                         placeholder="Password Confirm" />
                 </div>
                 <div className="inputDiv" style={inputDiv}>

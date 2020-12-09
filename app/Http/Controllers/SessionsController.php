@@ -8,10 +8,6 @@ use Illuminate\Support\Facades\DB;
 
 class SessionsController extends Controller
 {
-    // public function __construct() {
-    //     $this->middleware('guest', ['except' => 'destroy']);
-    // }
-
     public function state() {
         return \Auth::user();
     }
@@ -25,14 +21,6 @@ class SessionsController extends Controller
             $name = DB::table('users')->where('email', $request->email)->value('name');
             return $name;
         }
-    }
-
-    public function edit() {
-        
-    }
-
-    public function update() {
-        
     }
 
     public function destroy() {

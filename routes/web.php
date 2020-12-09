@@ -29,6 +29,6 @@ Route::post('/logout', '\App\Http\Controllers\SessionsController@destroy');
 
 Route::post('/state', '\App\Http\Controllers\SessionsController@state');
 
-Route::get('/profile', '\App\Http\Controllers\SessionsController@edit');
+// Route::get('/profile', '\App\Http\Controllers\???sController@edit');
 
-Route::post('/profile', '\App\Http\Controllers\SessionsController@update');
+// Route::post('/profile', '\App\Http\Controllers\???sController@update');

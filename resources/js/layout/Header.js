@@ -7,6 +7,22 @@ import { AppContext } from '../components/App';
 const Header = ({location, history}) => {
     const { isLoggedIn, setIsLoggedIn, userName, setUserName } = useContext(AppContext);
 
+    // const profile = () => {
+    //     const profileData = {
+    //         name: userName,
+    //     }
+
+    //     Axios
+    //         .get('/profile', profileData)
+    //         .then(result => {
+    //             console.log("profile get", result);
+    //         }
+    //         )
+    //         .catch(err => {
+    //             console.log("profile get err", err);
+    //         })
+    // }
+
     const logout = () => {
         console.log("login", isLoggedIn, "name", userName);
 
@@ -63,6 +79,7 @@ const Header = ({location, history}) => {
                 </div>
                 { isLoggedIn == "login" ? (
                     <div className="navEnd" style={navEnd}>
+                        {/* <Link to="/profile" className="navBtn" style={navBtn} id="name" onClick={profile}>{userName}님</Link> */}
                         <Link to="/" className="navBtn" style={navBtn} id="name">{userName}님</Link>
                         <Link to="/" className="navBtn" style={navBtn} id="logout" onClick={logout}>Logout</Link>
                     </div>

@@ -16,5 +16,13 @@ class BoardsTableSeeder extends Seeder
         \App\Models\Board::create([
             'board_name' => 'notice',
         ]);
+
+        \App\Models\Board::create([
+            'board_name' => 'qna',
+        ]);
+
+        \App\Models\Board::create([
+            'board_name' => 'Free',
+        ]);
     }
 }

@@ -9,7 +9,7 @@ import Body from '../layout/Body';
 
 import RegistForm from '../router/RegistForm';
 import LoginForm from '../router/LoginForm';
-import Profile from '../router/Profile';
+// import Profile from '../router/Profile';
 
 export const AppContext = createContext();
 
@@ -24,6 +24,7 @@ function App() {
         .then(result => {
             console.log("result state", result);
             if(result.data.name){
+                console.log(result.data.name, '/', userName);
                 setUserName(result.data.name);
                 setIsLoggedIn("login");
                 console.log('state 1');
@@ -39,16 +40,26 @@ function App() {
     }, [])
 
     return (
+        isLoggedIn == 'login' ? (
+        <AppContext.Provider value={{isLoggedIn, setIsLoggedIn, userName, setUserName}}>
+            <Router>
+                <Header />
+                <Route path="/" exact component={Body} />
+                {/* <Route path="/profile" exact component={Profile} /> */}
+                <Footer />
+            </Router>
+        </AppContext.Provider>
+        ) : (
         <AppContext.Provider value={{isLoggedIn, setIsLoggedIn, userName, setUserName}}>
             <Router>
                 <Header />
                 <Route path="/" exact component={Body} />
                 <Route path="/regist" exact component={RegistForm} />
                 <Route path="/login" exact component={LoginForm} />
-                <Route path="/profile" exact component={Profile} />
                 <Footer />
             </Router>
         </AppContext.Provider>
+        )
     );
 }
 

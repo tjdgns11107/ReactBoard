@@ -7,9 +7,9 @@ use Illuminate\Support\Facades\DB;
 
 class UsersController extends Controller
 {
-    // public function __construct() {
-    //     $this->middleware('guest');
-    // }
+    public function __construct() {
+        $this->middleware('guest');
+    }
 
     public function check(Request $request) {
         $email = $request->email;
@@ -30,16 +30,6 @@ class UsersController extends Controller
             'name' => $request->input('name'),
             'password' => bcrypt($request->input('password')),
         ]);
-
-        // $user = DB::table('users')->insert([
-            // 'email' => $request->input('email'),
-            // 'name' => $request->input('name'),
-            // 'password' => bcrypt($request->input('password')),
-        // ]);
-
-        // auth()->login($user);
-
-        // return auth()->user()->name;
 
         \Auth::login($user);
         return \Auth::user()->name;
