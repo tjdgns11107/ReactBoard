@@ -13,6 +13,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+
+Route::view('/{path?}', 'App');
+
+Route::post('/regist', '\App\Http\Controllers\UsersController@store');
+
+Route::post('/check', '\App\Http\Controllers\UsersController@check');
