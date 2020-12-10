@@ -33,5 +33,5 @@ class UsersController extends Controller
 
         \Auth::login($user);
         return \Auth::user()->name;
-    }
+    } 
 }

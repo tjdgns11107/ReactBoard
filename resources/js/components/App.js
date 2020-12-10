@@ -10,6 +10,7 @@ import Body from '../layout/Body';
 import RegistForm from '../router/RegistForm';
 import LoginForm from '../router/LoginForm';
 // import Profile from '../router/Profile';
+import BoardForm from '../router/BoardForm';
 
 export const AppContext = createContext();
 
@@ -44,7 +45,7 @@ function App() {
         <AppContext.Provider value={{isLoggedIn, setIsLoggedIn, userName, setUserName}}>
             <Router>
                 <Header />
-                <Route path="/" exact component={Body} />
+                <Route path="/" exact component={BoardForm} />
                 {/* <Route path="/profile" exact component={Profile} /> */}
                 <Footer />
             </Router>
